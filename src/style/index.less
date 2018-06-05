@@ -1,0 +1,42 @@
+@input-prefix-cls: ~"nd-input";
+.@{input-prefix-cls}-input-wrapper {
+  position: relative;
+  display: inline-block;
+  .@{input-prefix-cls}-input-placeholder {
+    color: #bfbfbf;
+    position: absolute;
+    display: inline-block;
+    z-index: 9;
+    max-width: 100%;
+    white-space:nowrap;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.@{input-prefix-cls}-textarea-wrapper {
+  position: relative;
+  .@{input-prefix-cls} {
+    cursor: text;
+    height: 22px;
+    border: 1px solid #eee;
+  }
+  .@{input-prefix-cls}-input-placeholder {
+    color: #bfbfbf;
+    position: absolute;
+    z-index: 9;
+    max-width: 100%;
+    white-space:nowrap;
+    left: 2px;
+    top: 2px;
+  }
+}
+@ie8: \0screen;
+@media @ie8 {
+  .@{input-prefix-cls}-input-wrapper {
+    > .@{input-prefix-cls}-input-placeholder {
+      line-height: 22px;
+      top: 0;
+    }
+  }
+}

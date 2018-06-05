@@ -1,0 +1,17 @@
+{
+  "presets": ["es2015", "react", "stage-0"],
+  "plugins": [
+    "add-module-exports",
+    "transform-decorators-legacy",
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals",
+    "transform-proto-to-assign",
+    [
+      "import",
+      [
+        { "libraryName": "src", "libraryDirectory": "", "style": true },
+        {"libraryName": "fish", "libraryDirectory": "lib", "style": true}
+      ]
+    ]
+  ]
+}
