@@ -23,10 +23,10 @@
     "lib"
   ],
   "dependencies": {
-    "@sdp.nd/fish": "^2.0.0",
     "babel-runtime": "^6.22.0"
   },
   "devDependencies": {
+    "@sdp.nd/fish": "^2.0.0",
     "pre-commit": "1.x",
     "fs-extra": "^0.26.7",
     "postcss-color-rgba-fallback": "^3.0.0",

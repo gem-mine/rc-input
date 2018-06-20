@@ -13,13 +13,13 @@ export default class Input extends React.Component {
   static propTypes = {
     prefixCls: React.PropTypes.string,
     onChange: React.PropTypes.func,
-    type: React.PropTypes.string,
+    type: React.PropTypes.oneOf(['text', 'textarea']),
     onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
-    defaultValue: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     style: React.PropTypes.object,
-    value: React.PropTypes.string
+    defaultValue: React.PropTypes.any,
+    value: React.PropTypes.any
   }
 
   state = {
@@ -44,7 +44,6 @@ export default class Input extends React.Component {
     if (!Reflect.has(this.props, 'value')) { // 非受控时触发重渲染
       this.setState({hidePlaceholder: this.inputRef.value.length > 0})
     }
-
     const onChange = this.props.onChange
     onChange && onChange(e)
   }
@@ -71,9 +70,14 @@ export default class Input extends React.Component {
     const { placeholder, prefixCls, value } = this.props
 
     let hide = false
-    if ((this.inputRef && this.inputRef.value.length > 0) || value.length > 0) {
-      hide = true
+    if ('value' in this.props) {
+      hide = value && value.length > 0
+    } else {
+      if (this.inputRef && this.inputRef.value) {
+        hide = this.inputRef.value.length > 0
+      }
     }
+
     if (placeholder) {
       return (
         <div
