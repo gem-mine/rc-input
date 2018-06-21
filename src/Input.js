@@ -13,7 +13,7 @@ export default class Input extends React.Component {
   static propTypes = {
     prefixCls: React.PropTypes.string,
     onChange: React.PropTypes.func,
-    type: React.PropTypes.oneOf(['text', 'textarea']),
+    type: React.PropTypes.string,
     onBlur: React.PropTypes.func,
     className: React.PropTypes.string,
     placeholder: React.PropTypes.string,
@@ -71,10 +71,12 @@ export default class Input extends React.Component {
 
     let hide = false
     if ('value' in this.props) {
-      hide = value && value.length > 0
+      if (value || value === 0) {
+        hide = value.toString().length > 0
+      }
     } else {
-      if (this.inputRef && this.inputRef.value) {
-        hide = this.inputRef.value.length > 0
+      if (this.inputRef && (this.inputRef.value || this.inputRef.value === 0)) {
+        hide = this.inputRef.value.toString().length > 0
       }
     }
 
