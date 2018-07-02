@@ -21,7 +21,6 @@ class App extends React.Component {
     const { userName } = this.state;
     return (
       <Input
-        className={'nd-input'}
         value={userName}
         onChange={this.onChangeUserName}
         placeholder={'用户名'}

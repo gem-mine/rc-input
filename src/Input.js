@@ -6,7 +6,8 @@ const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
 export default class Input extends React.Component {
   static defaultProps = {
     prefixCls: 'nd-input',
-    type: 'text'
+    type: 'text',
+    className: 'nd-input'
   }
   static propTypes = {
     prefixCls: React.PropTypes.string,

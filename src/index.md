@@ -23,7 +23,7 @@ import Input from "@sdp.nd/nd-input";
 | onChange           | 输入字符回调         | Function(event)                  | -               | false    |
 | type               | 声明 input 类型，同原生 input 标签的 type 属性。另外提供 type="textarea" | string | `text`   | false  |
 | style              | 容器节点样式         | Object                       | -               | false    |
-| className          | 输入框样式           | string                            | -               | false    |
+| className          | 输入框样式           | string                            | 'nd-input'             | false    |
 | prefixCls          | 组件样式类名称前缀    | string                             | 'nd-input'     | false    |
 | value              | 输入框内容           | string                              | -               | false    |
 | defaultValue       | 输入框默认内容        | string                             | -              | false    |

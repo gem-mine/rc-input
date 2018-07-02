@@ -12,7 +12,7 @@ class App extends React.Component {
     console.log(e.target.value)
   }
   render() {
-    return <Input className={'nd-input'} placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} />;
+    return <Input placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} />;
   }
 }
 ReactDOM.render(<App />, mountNode);
