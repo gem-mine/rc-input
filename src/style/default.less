@@ -1,0 +1,48 @@
+// Prefix
+@nd-prefix : nd; ///公用统一前缀
+
+// ------ Base & Require ------
+@com-disabled-bg : #f7f7f7; /// add 公用不可点击背景色，目前用于input，select
+@com-height-base : 30px; /// add 公用标准高度，目前用于input,按钮，radio button，form每个item高度
+@com-height-lg : 34px; /// add 公用大尺寸高度，目前用于input,按钮，radio button
+@com-height-sm : 22px; /// add 公用小尺寸高度，目前用于input,按钮，radio button，分页mini
+@component-background : #fff; ///select
+@text-color : fade(#000, 65%); /// 字体颜色，用于input,select。对应设计稿#595959
+@disabled-color : fade(#000, 25%); /// 不可点击字体颜色，input
+@font-size-base : 12px; /// 按钮，input小尺寸,page
+@font-size-lg : @font-size-base + 2px; ///input
+@font-size-sm : 12px;
+@line-height-base : 1.5; /// input
+@border-radius-base : 4px; ///目前用于按钮和tab，input，dropdown，select
+
+// Border color
+@border-color-base : #ddd; /// 边线颜色（次按钮边线，input边线，radio，dropdown，select，日期）
+@border-width-base : 1px; /// 边框粗细，input，select
+@border-style-base : solid; /// 边框类型，input，select
+
+// Outline
+@outline-blur-size : 0;
+@outline-width : 2px;
+@outline-color : @primary-color;
+
+// Input
+// ------------------------
+@input-box-shadow: true; /// focus时外边缘是否发光，可设置为false，取消该效果
+@input-height-base: @com-height-base; /// 中尺寸总高度
+@input-height-lg: @com-height-lg; /// 大尺寸总高度
+@input-height-sm: @com-height-sm; /// 小尺寸总高度
+
+@input-padding-horizontal : 12px; /// 中尺寸左右padding，还用于autocomplete
+@input-padding-vertical-base : 4px; ///中尺寸上下padding
+@input-padding-vertical-sm : 1px; ///小尺寸上下padding
+@input-padding-vertical-lg : 6px; /// 大尺寸上下padding
+
+@input-placeholder-color : #bfbfbf; ///placeholder文字颜色，dropdown二级菜单箭头，select向下箭头，select文字提示，select多选删除按钮，级联箭头
+@input-color : @text-color; /// 文字颜色
+@input-border-color : @border-color-base; /// 边线颜色
+@input-border-radius-base : @border-radius-base; /// input的border-radius
+@input-bg : #fff; /// 背景色
+@input-hover-border-color : @primary-color; ///
+@input-focus-border-color : @primary-color; ///
+@input-disabled-bg : @com-disabled-bg; /// disabled
+

@@ -2,9 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 
 const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
-function preventDefaultEvent (e) {
-  e.preventDefault()
-}
+
 export default class Input extends React.Component {
   static defaultProps = {
     prefixCls: 'nd-input',
@@ -41,8 +39,9 @@ export default class Input extends React.Component {
   }
 
   handleChange = (e) => {
-    if (!Reflect.has(this.props, 'value')) { // 非受控时触发重渲染
-      this.setState({hidePlaceholder: this.inputRef.value.length > 0})
+    // 非受控时触发重渲染(受控时setState在Form组件order：4 demo中光标问题)
+    if (!('value' in this.props)) {
+      this.setState({hidePlaceholder: this.existInputValue()})
     }
     const onChange = this.props.onChange
     onChange && onChange(e)
@@ -60,30 +59,32 @@ export default class Input extends React.Component {
     this.inputRef = node
   }
 
-  componentDidMount () { // when have defaultValue
-    if (this.inputRef && this.inputRef.value.length > 0) {
-      this.setState({hidePlaceholder: true})
+  existInputValue () {
+    const props = this.props
+    if ('value' in props) {
+      if (props.value || props.value === 0) {
+        return props.value.toString().length > 0
+      } else {
+        return false
+      }
+    } else {
+      if (this.inputRef) {
+        return this.inputRef.value.toString().length > 0
+      } else if (props.defaultValue || props.defaultValue === 0) {
+        return props.defaultValue.toString().length > 0
+      } else {
+        return false
+      }
     }
   }
 
   renderPlaceholder () {
-    const { placeholder, prefixCls, value } = this.props
-
-    let hide = false
-    if ('value' in this.props) {
-      if (value || value === 0) {
-        hide = value.toString().length > 0
-      }
-    } else {
-      if (this.inputRef && (this.inputRef.value || this.inputRef.value === 0)) {
-        hide = this.inputRef.value.toString().length > 0
-      }
-    }
+    const { placeholder, prefixCls } = this.props
+    let hide = this.existInputValue()
 
     if (placeholder) {
       return (
         <div
-          onMouseDown={preventDefaultEvent}
           onClick={this.handlePlaceholderClick}
           style={{ display: hide || this.state.hidePlaceholder ? 'none' : 'block' }}
           className={`${prefixCls}-input-placeholder`}

@@ -9,7 +9,7 @@ title: 文本域
 import Input from "@sdp.nd/nd-input";
 class App extends React.Component {
   render() {
-    return <Input type='textarea' placeholder='输入评论' />;
+    return <Input className={'nd-input'} type='textarea' placeholder='输入评论' />;
   }
 }
 ReactDOM.render(<App />, mountNode);
