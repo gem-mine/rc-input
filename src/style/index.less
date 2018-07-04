@@ -1,0 +1,52 @@
+@import "./mixin";
+
+// Input styles
+.@{nd-prefix}-input{
+  .input;
+}
+// textarea
+.@{nd-prefix}-input-textarea-wrapper {
+  position: relative;
+  // placeholder
+  .@{nd-prefix}-input-input-placeholder {
+    position: absolute;
+    z-index: 9;
+    top: @input-padding-vertical-base + 1;
+    left: @input-padding-horizontal + 2;
+    color: @input-placeholder-color;
+    line-height: @line-height-base;
+  }
+  // 字数统计
+  textarea {
+    height: 100%;
+    padding-bottom: 30px;
+  }
+}
+
+.@{nd-prefix}-input-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  > .@{nd-prefix}-input-input-placeholder {
+    color: @input-placeholder-color;
+    z-index: 9;
+    max-width: 100%;
+    white-space:nowrap;
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &-sm {
+    > .@{nd-prefix}-input-input-placeholder {
+      font-size: @font-size-sm;
+    }
+  }
+  @ie8: \0screen;
+  @media @ie8 {
+    .@{nd-prefix}-input + .@{nd-prefix}-input-input-placeholder {
+      margin-top: -9px;
+    }
+  }
+}
+
