@@ -81,7 +81,7 @@ export default class Input extends React.Component {
 
   renderPlaceholder () {
     const { placeholder, prefixCls } = this.props
-    let hide = this.existInputValue()
+    const hide = this.existInputValue()
 
     if (placeholder) {
       return (

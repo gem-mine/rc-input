@@ -1,7 +1,7 @@
 @import "./mixin";
 
 // Input styles
-.@{nd-prefix}-input{
+.@{nd-prefix}-input {
   .input;
 }
 // textarea
@@ -31,7 +31,7 @@
     color: @input-placeholder-color;
     z-index: 9;
     max-width: 100%;
-    white-space:nowrap;
+    white-space: nowrap;
     position: absolute;
     left: 14px;
     top: 50%;
@@ -43,6 +43,7 @@
     }
   }
   @ie8: \0screen;
+
   @media @ie8 {
     .@{nd-prefix}-input + .@{nd-prefix}-input-input-placeholder {
       margin-top: -9px;
