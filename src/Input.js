@@ -104,12 +104,10 @@ export default class Input extends React.Component {
       mockPlaceholder = this.renderPlaceholder()
       delete otherProps.placeholder
     }
-    const { style } = this.props
-    delete otherProps.style
 
     if (type === 'textarea') {
       return (
-        <div className={classNames(`${prefixCls}-textarea-wrapper`)} style={style}>
+        <div className={classNames(`${prefixCls}-textarea-wrapper`)}>
           <textarea
             {...otherProps}
             className={className}
@@ -123,7 +121,7 @@ export default class Input extends React.Component {
       )
     } else {
       return (
-        <div className={classNames(`${prefixCls}-input-wrapper`)} style={style}>
+        <div className={classNames(`${prefixCls}-input-wrapper`)}>
           <input
             {...otherProps}
             className={className}
