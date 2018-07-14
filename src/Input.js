@@ -105,11 +105,20 @@ export default class Input extends React.Component {
       delete otherProps.placeholder
     }
 
+    let { style } = this.props
+    delete otherProps.style
+
+    if (!style) {
+      style = {}
+    }
+    const { height, width, ...restStyleProps } = style
+
     if (type === 'textarea') {
       return (
-        <div className={classNames(`${prefixCls}-textarea-wrapper`)}>
+        <div className={classNames(`${prefixCls}-textarea-wrapper`)} style={{height, width}}>
           <textarea
             {...otherProps}
+            style={{...restStyleProps}}
             className={className}
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
@@ -121,9 +130,10 @@ export default class Input extends React.Component {
       )
     } else {
       return (
-        <div className={classNames(`${prefixCls}-input-wrapper`)}>
+        <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
           <input
             {...otherProps}
+            style={{...restStyleProps}}
             className={className}
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
