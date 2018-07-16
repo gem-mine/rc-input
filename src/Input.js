@@ -133,6 +133,7 @@ export default class Input extends React.Component {
         <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
           <input
             {...otherProps}
+            type={type}
             style={{...restStyleProps}}
             className={className}
             onCompositionStart={this.handleComposition}
