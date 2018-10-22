@@ -3,6 +3,15 @@ import classNames from 'classnames'
 
 const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
 
+const generateId = () => {
+  let d = new Date().getTime()
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    const r = (d + Math.random() * 16) % 16 | 0
+    d = Math.floor(d / 16)
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16)
+  })
+}
+
 export default class Input extends React.Component {
   static defaultProps = {
     prefixCls: 'nd-input',
@@ -11,6 +20,7 @@ export default class Input extends React.Component {
   }
   static propTypes = {
     prefixCls: React.PropTypes.string,
+    id: React.PropTypes.string,
     onChange: React.PropTypes.func,
     type: React.PropTypes.string,
     onBlur: React.PropTypes.func,
@@ -28,6 +38,16 @@ export default class Input extends React.Component {
   inputRef = null
 
   isOnComposition = false
+
+  id = ''
+
+  constructor (props) {
+    super(props)
+    const id = props.id
+    if (!id) {
+      this.id = generateId()
+    }
+  }
 
   handleComposition = (e) => {
     if (e.type === 'compositionstart') { // 标识是否处于组字状态
@@ -80,25 +100,26 @@ export default class Input extends React.Component {
   }
 
   renderPlaceholder () {
-    const { placeholder, prefixCls } = this.props
+    const { placeholder, prefixCls, id } = this.props
     const hide = this.existInputValue()
 
     if (placeholder) {
       return (
-        <div
+        <label
           onClick={this.handlePlaceholderClick}
+          htmlFor={id || this.id}
           style={{ display: hide || this.state.hidePlaceholder ? 'none' : 'block' }}
           className={`${prefixCls}-input-placeholder`}
         >
           {placeholder}
-        </div>
+        </label>
       )
     }
     return null
   }
 
   render () {
-    const { type, prefixCls, className, ...otherProps } = this.props
+    const { type, prefixCls, id, className, ...otherProps } = this.props
     let mockPlaceholder = null
     if (IS_IE) { // ie系列不用原生placeholder
       mockPlaceholder = this.renderPlaceholder()
@@ -133,6 +154,7 @@ export default class Input extends React.Component {
         <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
           <input
             {...otherProps}
+            id={id || this.id}
             type={type}
             style={{...restStyleProps}}
             className={className}
