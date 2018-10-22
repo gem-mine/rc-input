@@ -68,10 +68,6 @@ export default class Input extends React.Component {
     onChange && onChange(e)
   }
 
-  handlePlaceholderClick = () => {
-    this.focus()
-  }
-
   focus () {
     this.inputRef.focus()
   }
@@ -106,7 +102,6 @@ export default class Input extends React.Component {
     if (placeholder) {
       return (
         <label
-          onClick={this.handlePlaceholderClick}
           htmlFor={id || this.id}
           style={{ display: hide || this.state.hidePlaceholder ? 'none' : 'block' }}
           className={`${prefixCls}-input-placeholder`}
