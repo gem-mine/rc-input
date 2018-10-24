@@ -11,8 +11,11 @@ class App extends React.Component {
   handleChange(e){
     console.log(e.target.value)
   }
+  handleClick(e){
+    console.log(e)
+  }
   render() {
-    return <Input placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} />;
+    return <Input placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} onClick={this.handleClick} />;
   }
 }
 ReactDOM.render(<App />, mountNode);
