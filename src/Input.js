@@ -39,13 +39,15 @@ export default class Input extends React.Component {
 
   isOnComposition = false
 
-  id = ''
+  inputId = ''
 
   constructor (props) {
     super(props)
     const id = props.id
-    if (!id) {
-      this.id = generateId()
+    if (id) {
+      this.inputId = id
+    } else {
+      this.inputId = generateId()
     }
   }
 
@@ -149,7 +151,7 @@ export default class Input extends React.Component {
         <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
           <input
             {...otherProps}
-            id={id || this.id}
+            id={this.inputId}
             type={type}
             style={{...restStyleProps}}
             className={className}
