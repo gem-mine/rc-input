@@ -136,6 +136,7 @@ export default class Input extends React.Component {
         <div className={classNames(`${prefixCls}-textarea-wrapper`)} style={{height, width}}>
           <textarea
             {...otherProps}
+            id={this.inputId}
             style={{...restStyleProps}}
             className={className}
             onCompositionStart={this.handleComposition}
