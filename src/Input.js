@@ -98,13 +98,13 @@ export default class Input extends React.Component {
   }
 
   renderPlaceholder () {
-    const { placeholder, prefixCls, id } = this.props
+    const { placeholder, prefixCls } = this.props
     const hide = this.existInputValue()
 
     if (placeholder) {
       return (
         <label
-          htmlFor={id || this.id}
+          htmlFor={this.inputId}
           style={{ display: hide || this.state.hidePlaceholder ? 'none' : 'block' }}
           className={`${prefixCls}-input-placeholder`}
         >
@@ -116,7 +116,7 @@ export default class Input extends React.Component {
   }
 
   render () {
-    const { type, prefixCls, id, className, ...otherProps } = this.props
+    const { type, prefixCls, className, ...otherProps } = this.props
     let mockPlaceholder = null
     if (IS_IE) { // ie系列不用原生placeholder
       mockPlaceholder = this.renderPlaceholder()
