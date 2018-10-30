@@ -116,7 +116,7 @@ export default class Input extends React.Component {
   }
 
   render () {
-    const { type, prefixCls, className, ...otherProps } = this.props
+    const { type, prefixCls, id, className, ...otherProps } = this.props
     let mockPlaceholder = null
     if (IS_IE) { // ie系列不用原生placeholder
       mockPlaceholder = this.renderPlaceholder()
