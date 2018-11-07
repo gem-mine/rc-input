@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
@@ -19,16 +20,16 @@ export default class Input extends React.Component {
     className: 'nd-input'
   }
   static propTypes = {
-    prefixCls: React.PropTypes.string,
-    id: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    type: React.PropTypes.string,
-    onBlur: React.PropTypes.func,
-    className: React.PropTypes.string,
-    placeholder: React.PropTypes.string,
-    style: React.PropTypes.object,
-    defaultValue: React.PropTypes.any,
-    value: React.PropTypes.any
+    prefixCls: PropTypes.string,
+    id: PropTypes.string,
+    onChange: PropTypes.func,
+    type: PropTypes.string,
+    onBlur: PropTypes.func,
+    className: PropTypes.string,
+    placeholder: PropTypes.string,
+    style: PropTypes.object,
+    defaultValue: PropTypes.any,
+    value: PropTypes.any
   }
 
   state = {
