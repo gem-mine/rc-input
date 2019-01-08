@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
+const IS_IE9 = !window.atob
 
 const generateId = () => {
   let d = new Date().getTime()
@@ -119,7 +119,7 @@ export default class Input extends React.Component {
   render () {
     const { type, prefixCls, id, className, ...otherProps } = this.props
     let mockPlaceholder = null
-    if (IS_IE) { // ie系列不用原生placeholder
+    if (IS_IE9) { // ie9不用原生placeholder
       mockPlaceholder = this.renderPlaceholder()
       delete otherProps.placeholder
     }
@@ -130,16 +130,14 @@ export default class Input extends React.Component {
     if (!style) {
       style = {}
     }
-    const { height, width, ...restStyleProps } = style
 
     if (type === 'textarea') {
       return (
-        <div className={classNames(`${prefixCls}-textarea-wrapper`)} style={{height, width}}>
+        <div className={classNames(`${prefixCls}-wrapper ${prefixCls}-textarea`, className)} style={style}>
           <textarea
             {...otherProps}
             id={this.inputId}
-            style={{...restStyleProps}}
-            className={className}
+            style={{overflowY: style.overflowY}} // 处理scrollbar闪烁出现问题
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
@@ -150,13 +148,11 @@ export default class Input extends React.Component {
       )
     } else {
       return (
-        <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
+        <div className={classNames(`${prefixCls}-wrapper`, className)} style={style}>
           <input
             {...otherProps}
             id={this.inputId}
             type={type}
-            style={{...restStyleProps}}
-            className={className}
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
