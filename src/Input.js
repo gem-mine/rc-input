@@ -24,6 +24,7 @@ export default class Input extends React.Component {
     id: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
+    onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     className: PropTypes.string,
     placeholder: PropTypes.string,
@@ -33,7 +34,8 @@ export default class Input extends React.Component {
   }
 
   state = {
-    hidePlaceholder: false
+    hidePlaceholder: false,
+    focused: false
   }
 
   inputRef = null
@@ -69,6 +71,24 @@ export default class Input extends React.Component {
     }
     const onChange = this.props.onChange
     onChange && onChange(e)
+  }
+
+  handleFocus = (e) => {
+    this.setState({
+      focused: true
+    })
+
+    const onFocus = this.props.onFocus
+    onFocus && onFocus(e)
+  }
+
+  handleBlur = (e) => {
+    this.setState({
+      focused: false
+    })
+
+    const onBlur = this.props.onBlur
+    onBlur && onBlur(e)
   }
 
   focus () {
@@ -131,9 +151,13 @@ export default class Input extends React.Component {
       style = {}
     }
 
+    const wrapperClass = classNames(`${prefixCls}-wrapper ${prefixCls}-textarea`, {
+      [`${prefixCls}-focused`]: this.state.focused
+    }, className)
+
     if (type === 'textarea') {
       return (
-        <div className={classNames(`${prefixCls}-wrapper ${prefixCls}-textarea`, className)} style={style}>
+        <div className={wrapperClass} style={style}>
           <textarea
             {...otherProps}
             id={this.inputId}
@@ -141,6 +165,8 @@ export default class Input extends React.Component {
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
             ref={this.saveRef}
           />
           {mockPlaceholder}
@@ -148,7 +174,7 @@ export default class Input extends React.Component {
       )
     } else {
       return (
-        <div className={classNames(`${prefixCls}-wrapper`, className)} style={style}>
+        <div className={wrapperClass} style={style}>
           <input
             {...otherProps}
             id={this.inputId}
@@ -156,6 +182,8 @@ export default class Input extends React.Component {
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
             ref={this.saveRef}
           />
           {mockPlaceholder}
