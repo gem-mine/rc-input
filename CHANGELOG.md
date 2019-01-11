@@ -13,6 +13,15 @@ timeline: true
 
 ---
 
+## 2.0.0
+
+`2019-1-8`
+
+* 由原来ie全系列使用模拟placeholder改为只在ie9下使用placeholder
+* 将props.style全部放入到div包裹层
+* 将props.className全部放入到div包裹层
+* 根据以上修改调整样式
+
 ## 1.0.0
 
 `2018-6-19`

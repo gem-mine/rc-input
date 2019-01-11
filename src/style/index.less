@@ -3,51 +3,48 @@
 // Input styles
 .@{nd-prefix}-input {
   .input;
-}
-// textarea
-.@{nd-prefix}-input-textarea-wrapper {
-  position: relative;
-  // placeholder
-  .@{nd-prefix}-input-input-placeholder {
-    position: absolute;
-    z-index: 9;
-    top: @input-padding-vertical-base + 1;
-    left: @input-padding-horizontal + 2;
-    color: @input-placeholder-color;
-    line-height: @line-height-base;
-  }
-  // 字数统计
-  textarea {
-    height: 100%;
-    padding-bottom: 30px;
-  }
-}
 
-.@{nd-prefix}-input-input-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  > .@{nd-prefix}-input-input-placeholder {
-    color: @input-placeholder-color;
-    z-index: 9;
-    max-width: 100%;
-    white-space: nowrap;
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
+  //mock placeholder
+  &-wrapper {
+    position: relative;
+    .@{nd-prefix}-input-input-placeholder {
+      color: @input-placeholder-color;
+      z-index: 9;
+      max-width: 100%;
+      white-space: nowrap;
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      line-height: @line-height-base;
+      font-size: @font-size-base;
+    }
   }
   &-sm {
     > .@{nd-prefix}-input-input-placeholder {
       font-size: @font-size-sm;
     }
   }
-  @ie8: \0screen;
-
-  @media @ie8 {
-    .@{nd-prefix}-input + .@{nd-prefix}-input-input-placeholder {
-      margin-top: -9px;
-    }
-  }
 }
 
+
+// mock placeholder
+.@{nd-prefix}-input-wrapper.@{nd-prefix}-input-textarea {
+  overflow: hidden;
+  height: auto;
+  vertical-align: middle; // 子元素为inline-bolck元素没设置对齐方式底下会有间距
+  padding: 0;
+  .@{nd-prefix}-input-input-placeholder {
+    position: absolute;
+    z-index: 9;
+    top: @input-padding-vertical-base;
+    left: @input-padding-horizontal;
+    transform: translateY(0);
+    color: @input-placeholder-color;
+    line-height: @line-height-base;
+    font-size: @font-size-base;
+  }
+  > textarea {
+    padding: @input-padding-vertical-base @input-padding-horizontal-base; // padding设置在外面的div层scrollbar显示问题
+  }
+}

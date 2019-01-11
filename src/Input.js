@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
+const IS_IE9 = !window.atob
 
 const generateId = () => {
   let d = new Date().getTime()
@@ -24,6 +24,7 @@ export default class Input extends React.Component {
     id: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
+    onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     className: PropTypes.string,
     placeholder: PropTypes.string,
@@ -33,7 +34,8 @@ export default class Input extends React.Component {
   }
 
   state = {
-    hidePlaceholder: false
+    hidePlaceholder: false,
+    focused: false
   }
 
   inputRef = null
@@ -69,6 +71,24 @@ export default class Input extends React.Component {
     }
     const onChange = this.props.onChange
     onChange && onChange(e)
+  }
+
+  handleFocus = (e) => {
+    this.setState({
+      focused: true
+    })
+
+    const onFocus = this.props.onFocus
+    onFocus && onFocus(e)
+  }
+
+  handleBlur = (e) => {
+    this.setState({
+      focused: false
+    })
+
+    const onBlur = this.props.onBlur
+    onBlur && onBlur(e)
   }
 
   focus () {
@@ -119,7 +139,7 @@ export default class Input extends React.Component {
   render () {
     const { type, prefixCls, id, className, ...otherProps } = this.props
     let mockPlaceholder = null
-    if (IS_IE) { // ie系列不用原生placeholder
+    if (IS_IE9) { // ie9不用原生placeholder
       mockPlaceholder = this.renderPlaceholder()
       delete otherProps.placeholder
     }
@@ -130,19 +150,23 @@ export default class Input extends React.Component {
     if (!style) {
       style = {}
     }
-    const { height, width, ...restStyleProps } = style
+
+    const wrapperClass = classNames(`${prefixCls}-wrapper ${prefixCls}-textarea`, {
+      [`${prefixCls}-focused`]: this.state.focused
+    }, className)
 
     if (type === 'textarea') {
       return (
-        <div className={classNames(`${prefixCls}-textarea-wrapper`)} style={{height, width}}>
+        <div className={wrapperClass} style={style}>
           <textarea
             {...otherProps}
             id={this.inputId}
-            style={{...restStyleProps}}
-            className={className}
+            style={{overflowY: style.overflowY}} // 处理scrollbar闪烁出现问题
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
             ref={this.saveRef}
           />
           {mockPlaceholder}
@@ -150,16 +174,16 @@ export default class Input extends React.Component {
       )
     } else {
       return (
-        <div className={classNames(`${prefixCls}-input-wrapper`)} style={{height, width}}>
+        <div className={wrapperClass} style={style}>
           <input
             {...otherProps}
             id={this.inputId}
             type={type}
-            style={{...restStyleProps}}
-            className={className}
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
             ref={this.saveRef}
           />
           {mockPlaceholder}
