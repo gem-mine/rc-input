@@ -151,7 +151,7 @@ export default class Input extends React.Component {
       style = {}
     }
 
-    const wrapperClass = classNames(`${prefixCls}-wrapper ${prefixCls}-textarea`, {
+    const wrapperClass = classNames(`${prefixCls}-wrapper`, {
       [`${prefixCls}-focused`]: this.state.focused
     }, className)
 
