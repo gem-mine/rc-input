@@ -15,7 +15,7 @@ class App extends React.Component {
     console.log(e)
   }
   render() {
-    return <Input readOnly='asd' placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} onClick={this.handleClick} />;
+    return <Input readOnly placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} onClick={this.handleClick} />;
   }
 }
 ReactDOM.render(<App />, mountNode);
