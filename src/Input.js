@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const IS_IE9 = !window.atob
+const IS_IE = !!window.ActiveXObject || 'ActiveXObject' in window
 
 const generateId = () => {
   let d = new Date().getTime()
@@ -26,9 +27,11 @@ export default class Input extends React.Component {
     type: PropTypes.string,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func,
     className: PropTypes.string,
     placeholder: PropTypes.string,
     style: PropTypes.object,
+    readOnly: PropTypes.any,
     defaultValue: PropTypes.any,
     value: PropTypes.any
   }
@@ -89,6 +92,15 @@ export default class Input extends React.Component {
 
     const onBlur = this.props.onBlur
     onBlur && onBlur(e)
+  }
+
+  handleKeyDown = (e) => {
+    // ie && 退格键 && readonly属性, 那么阻止默认行为(跳转回上一页面)
+    if (this.props.readOnly && IS_IE && e.keyCode === 8) {
+      e.preventDefault()
+    }
+    const onKeyDown = this.props.onKeyDown
+    onKeyDown && onKeyDown(e)
   }
 
   focus () {
@@ -167,6 +179,7 @@ export default class Input extends React.Component {
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
+            onKeyDown={this.handleKeyDown}
             ref={this.saveRef}
           />
           {mockPlaceholder}
@@ -184,6 +197,7 @@ export default class Input extends React.Component {
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
+            onKeyDown={this.handleKeyDown}
             ref={this.saveRef}
           />
           {mockPlaceholder}
