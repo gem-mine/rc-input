@@ -1,9 +1,9 @@
 ---
 order: 5
-title: readonly属性
+title: readOnly属性
 ---
 
-使用readonly属性时，在ie下不回退页面
+使用readOnly属性时，在ie下不回退页面
 
 ```jsx
 import Input from "@sdp.nd/nd-input";
