@@ -13,10 +13,123 @@ ie系列浏览器下使用模拟placeholder以及composition时间的处理
 ## 安装
 
 ```bash
-$ npm install @sdp.nd/nd-input --save
+$ npm install @gem-mine/rc-input --save
 ```
 
-## [如何使用](http://git.sdp.nd/component-h5/nd-input/tree/master/src/index.md)
+## 代码演示
+
+在线示例：https://gem-mine.github.io/rc-input/site/
+
+### 基本使用
+
+```jsx
+import Input from "@gem-mine/rc-input";
+import '@gem-mine/rc-input/lib/style';
+
+class App extends React.Component {
+  handleChange(e){
+    console.log(e.target.value)
+  }
+  handleClick(e){
+    console.log(e)
+  }
+  render() {
+    return <Input placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} onClick={this.handleClick} />;
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
+
+### 受控输入框
+
+```jsx
+import Input from "@gem-mine/rc-input";
+import '@gem-mine/rc-input/lib/style';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+    };
+  }
+  onChangeUserName = (e) => {
+    this.setState({ userName: e.target.value });
+  }
+  render() {
+    const { userName } = this.state;
+    return (
+      <Input
+        value={userName}
+        onChange={this.onChangeUserName}
+        placeholder={'用户名'}
+      />
+    );
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
+
+### 文本域输入
+
+```jsx
+import Input from "@gem-mine/rc-input";
+import '@gem-mine/rc-input/lib/style';
+
+class App extends React.Component {
+  render() {
+    return <Input type='textarea' rows='4' placeholder='输入评论' />;
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
+
+### 密码框
+
+```jsx
+import Input from "@gem-mine/rc-input";
+import '@gem-mine/rc-input/lib/style';
+
+class App extends React.Component {
+  render() {
+    return <Input placeholder='密码' type='password' />;
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
+
+### 受控输入框获取的值为异步获取
+
+```jsx
+import Input from "@gem-mine/rc-input";
+import '@gem-mine/rc-input/lib/style';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: '',
+    };
+  }
+  componentDidMount() {
+    this.setState({ userName: '异步值'});
+  }
+  onChangeUserName = (e) => {
+    this.setState({ userName: e.target.value });
+  }
+  render() {
+    const { userName } = this.state;
+    return (
+      <Input
+        value={userName}
+        onChange={this.onChangeUserName}
+        placeholder={'用户名'}
+      />
+    );
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
 
 ## API
 

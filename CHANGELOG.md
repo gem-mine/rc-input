@@ -31,4 +31,4 @@ timeline: true
 
 `2018-6-19`
 
-* [项目源码](http://git.sdp.nd/component-h5/nd-input), 兼容 IE浏览器placeholder 和 composition事件处理 的输入框
+* [项目源码](https://github.com/gem-mine/rc-input), 兼容 IE浏览器placeholder 和 composition事件处理 的输入框

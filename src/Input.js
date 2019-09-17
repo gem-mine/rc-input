@@ -67,7 +67,7 @@ export default class Input extends React.Component {
   handleChange = (e) => {
     // 非受控时触发重渲染(受控时setState在Form组件order：4 demo中光标问题)
     if (!('value' in this.props)) {
-      this.setState({hidePlaceholder: this.existInputValue()})
+      this.setState({ hidePlaceholder: this.existInputValue() })
     }
     const onChange = this.props.onChange
     onChange && onChange(e)
@@ -161,7 +161,7 @@ export default class Input extends React.Component {
           <textarea
             {...otherProps}
             id={this.inputId}
-            style={{overflowY: style.overflowY}} // 处理scrollbar闪烁出现问题
+            style={{ overflowY: style.overflowY }} // 处理scrollbar闪烁出现问题
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}

@@ -6,12 +6,6 @@
     "transform-es3-member-expression-literals",
     "transform-es3-property-literals",
     "transform-proto-to-assign",
-    [
-      "import",
-      [
-        { "libraryName": "src", "libraryDirectory": "", "style": true },
-        {"libraryName": "fish", "libraryDirectory": "lib", "style": true}
-      ]
-    ]
+    ["import", {"libraryName": "fish", "libraryDirectory": "lib", "style": true}]
   ]
 }
