@@ -131,6 +131,24 @@ class App extends React.Component {
 ReactDOM.render(<App />, mountNode);
 ```
 
+### 使用readOnly属性时，在ie下不回退页面
+
+```jsx
+import Input from "@gem-mine/rc-input";
+class App extends React.Component {
+  handleChange(e){
+    console.log(e.target.value)
+  }
+  handleClick(e){
+    console.log(e)
+  }
+  render() {
+    return <Input readOnly placeholder='用户名' defaultValue="默认值" onChange={this.handleChange} onClick={this.handleClick} />;
+  }
+}
+ReactDOM.render(<App />, mountNode);
+```
+
 ## API
 
 | 参数               | 说明               | 类型                               | 默认值          | 是否必填 |
@@ -139,7 +157,7 @@ ReactDOM.render(<App />, mountNode);
 | type               | 声明 input 类型，同原生 input 标签的 type 属性。另外提供 type="textarea" | string | `text`   | false  |
 | style              | 容器节点样式         | Object                       | -               | false    |
 | className          | 输入框样式           | string                            | -               | false    |
-| prefixCls          | 组件样式类名称前缀    | string                             | 'nd-input'     | false    |
+| prefixCls          | 组件样式类名称前缀    | string                             | 'rc-input'     | false    |
 | value              | 输入框内容           | string                              | -               | false    |
 | defaultValue       | 输入框默认内容        | string                             | -              | false    |
 | placeholder        | 同元素placeholder属性 | string                                | -                | false  |

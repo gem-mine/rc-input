@@ -1,13 +1,13 @@
 @import "./mixin";
 
 // Input styles
-.@{nd-prefix}-input {
+.@{rc-prefix}-input {
   .input;
 
   //mock placeholder
   &-wrapper {
     position: relative;
-    .@{nd-prefix}-input-input-placeholder {
+    .@{rc-prefix}-input-input-placeholder {
       color: @input-placeholder-color;
       z-index: 9;
       max-width: 100%;
@@ -21,19 +21,19 @@
     }
   }
   &-sm {
-    > .@{nd-prefix}-input-input-placeholder {
+    > .@{rc-prefix}-input-input-placeholder {
       font-size: @font-size-sm;
     }
   }
 }
 
 // mock placeholder
-.@{nd-prefix}-input-wrapper.@{nd-prefix}-input-textarea {
+.@{rc-prefix}-input-wrapper.@{rc-prefix}-input-textarea {
   overflow: hidden;
   height: auto;
   vertical-align: middle; // 子元素为inline-bolck元素没设置对齐方式底下会有间距
   padding: 0;
-  .@{nd-prefix}-input-input-placeholder {
+  .@{rc-prefix}-input-input-placeholder {
     position: absolute;
     z-index: 9;
     top: @input-padding-vertical-base;

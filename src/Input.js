@@ -16,9 +16,9 @@ const generateId = () => {
 
 export default class Input extends React.Component {
   static defaultProps = {
-    prefixCls: 'nd-input',
+    prefixCls: 'rc-input',
     type: 'text',
-    className: 'nd-input'
+    className: 'rc-input'
   }
   static propTypes = {
     prefixCls: PropTypes.string,

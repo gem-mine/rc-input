@@ -17,7 +17,7 @@
     "clean": "shx rm -rf lib site && shx echo clean Done",
     "pub": "npm run build && npm publish --access public"
   },
-  "homepage": "https://github.com/gem-mine/rc-gallery",
+  "homepage": "https://github.com/gem-mine/rc-input",
   "pre-commit": [
     "lint"
   ],
