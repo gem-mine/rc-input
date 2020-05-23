@@ -52,7 +52,7 @@ export default class Input extends React.Component {
     const id = props.id
     if (id) {
       this.inputId = id
-    } else {
+    } else if (IS_IE9) {
       this.inputId = generateId()
     }
   }
@@ -130,10 +130,9 @@ export default class Input extends React.Component {
     }
   }
 
-  renderPlaceholder () {
-    const { placeholder, prefixCls } = this.props
+  renderPlaceholder = (placeholder, prefixCls) => {
     const hide = this.existInputValue()
-
+    // ie9 下 label 标签使用 id 关联起来，点击 placeholder 后可以时输入框聚焦,
     if (placeholder) {
       return (
         <label
@@ -149,18 +148,14 @@ export default class Input extends React.Component {
   }
 
   render () {
-    const { type, prefixCls, id, className, ...otherProps } = this.props
+    let { type, id, prefixCls, className, style, placeholder, ...otherProps } = this.props
     let mockPlaceholder = null
-    if (IS_IE9) { // ie9不用原生placeholder
-      mockPlaceholder = this.renderPlaceholder()
-      delete otherProps.placeholder
+    if (IS_IE9) {
+      mockPlaceholder = this.renderPlaceholder(placeholder, prefixCls)
     }
 
-    let { style } = this.props
-    delete otherProps.style
-
-    if (!style) {
-      style = {}
+    if (this.inputId) {
+      id = this.inputId
     }
 
     const wrapperClass = classNames(`${prefixCls}-wrapper`, {
@@ -171,9 +166,7 @@ export default class Input extends React.Component {
       return (
         <div className={wrapperClass} style={style}>
           <textarea
-            {...otherProps}
-            id={this.inputId}
-            style={{ overflowY: style.overflowY }} // 处理scrollbar闪烁出现问题
+            style={{ overflowY: style && style.overflowY }} // 处理scrollbar闪烁出现问题
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
             onChange={this.handleChange}
@@ -181,6 +174,9 @@ export default class Input extends React.Component {
             onBlur={this.handleBlur}
             onKeyDown={this.handleKeyDown}
             ref={this.saveRef}
+            id={id}
+            placeholder={placeholder}
+            {...otherProps}
           />
           {mockPlaceholder}
         </div>
@@ -189,8 +185,6 @@ export default class Input extends React.Component {
       return (
         <div className={wrapperClass} style={style}>
           <input
-            {...otherProps}
-            id={this.inputId}
             type={type}
             onCompositionStart={this.handleComposition}
             onCompositionEnd={this.handleComposition}
@@ -199,6 +193,9 @@ export default class Input extends React.Component {
             onBlur={this.handleBlur}
             onKeyDown={this.handleKeyDown}
             ref={this.saveRef}
+            id={id}
+            placeholder={placeholder}
+            {...otherProps}
           />
           {mockPlaceholder}
         </div>
